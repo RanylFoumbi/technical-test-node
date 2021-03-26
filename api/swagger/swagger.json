@@ -1,0 +1,209 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Djemo-digital-node-api",
+        "description": "My node API",
+        "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:8000",
+    "basePath": "/",
+    "tags": [
+        {
+          "name": "Users",
+          "description": "API for users in the system"
+        }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+          "/users/new":{
+            "post": {
+                "tags": ["Users"],
+                "summary": "Create new user",
+                "parameters": [
+                  {
+                    "name": "user",
+                    "in": "body",
+                    "description": "User that we want to create",
+                    "schema": {
+                      "$ref": "#/definitions/User"
+                    }
+                  }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "New user created successfully!",
+                        "schema":{
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "404":{
+                        "description": "Not found",
+                        "schema":{
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/all":{
+            "get": {
+                "tags": ["Users"],
+                "summary": "Get all users in system",
+                "responses": {
+                    "200":{
+                        "description": "Ok",
+                        "schema":{
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "404":{
+                        "description": "Not found",
+                        "schema":{
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/update/{id}":{
+          "patch": {
+            "summary": "Update user with give ID",
+            "tags": [
+              "Users"
+            ],
+            "parameters": [
+              {
+                "name": "user",
+                "in": "body",
+                "description": "User with new values of properties",
+                "schema": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "User updated successfully!",
+                "schema": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          }
+        },
+        "/users/delete/{id}":{
+          "delete": {
+            "summary": "Delete user with given ID",
+            "tags": [
+              "Users"
+            ],
+            "responses": {
+              "200": {
+                "description": "User deleted successfully!",
+                "schema": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          }
+        },
+        "/users/{id}": {
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID of user that we want to find",
+                "type": "string"
+              }
+            ],
+            "get": {
+                "summary": "Get user with given ID",
+                "tags": [
+                  "Users"
+                ],
+                "responses": {
+                  "200": {
+                    "description": "OK",
+                    "schema": {
+                      "$ref": "#/definitions/User"
+                    }
+                  }
+                }
+              }
+          }
+    },
+    "definitions":{
+        "User":{
+            "required": [
+                ""
+            ],
+            "properties": {
+                "matricule":{
+                  "type":"number"
+                },
+                "firstname":{
+                    "type":"string"
+                },
+                "lastname":{
+                    "type":"string"
+                },
+                "phone":{
+                  "type":"string"
+                },
+                "email":{
+                  "type":"string"
+                },
+                "address":{
+                  "type":"array",
+                  "$ref": "#/definitions/Address"
+              }
+            },
+            "example":
+            {
+            "matricule": 10021,
+            "lastName" : "FOTSO",
+            "firstName" : "DJEMO",
+            "email" : "aureli@freelance.com",
+            "phone" : "237 6 90 00 00 00",
+            "address": {
+            "street": "ETOA MEKI",
+            "postalCode": "92300",
+            "city": "YAOUNDE",
+            "country": "CAMEROUN"
+            }
+            }
+        },
+        "Address":{
+          "properties": {
+            "street":{
+              "type":"string"
+            },
+            "postalCode":{
+                "type":"string"
+            },
+            "city":{
+                "type":"string"
+            },
+            "country":{
+              "type":"string"
+            }
+          },
+          "example":{
+
+          }
+        }
+    }
+}
